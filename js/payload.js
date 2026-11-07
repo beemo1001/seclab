@@ -511,9 +511,9 @@ const SLPayload = (() => {
 
   function view() {
     rootEl = h('div', { class: 'view' },
-      SL.sectionTitle('code', 'Payload Lab'),
+      SL.sectionTitle('code', 'Decoder'),
       h('p', { class: 'section-sub' },
-        'This is not another payload cheat sheet. You will not find strings to blindly throw at forms. It is a systematic approach to understanding web applications at a fundamental level, so you can craft payloads that work in any environment. Think of it as learning to fish instead of being handed a fish: read any web app like a blueprint, understand WHY payloads fail and fix them, escalate basic findings into serious bounties, adapt to any framework, filter or protection.'),
+        'Paste anything encoded and peel it layer by layer, then X-ray a payload to see why each part works, which injection context it targets, and what to change when it fails.'),
       h('div', { class: 'tab-row', id: 'plTabs' }),
       h('div', { id: 'plMain' }));
     render();

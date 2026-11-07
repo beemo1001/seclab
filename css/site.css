@@ -1,0 +1,56 @@
+/* ============================================================
+   SecLab · CyberFlow layer (loaded after the legacy styles.css)
+   Bigger type, more air, brand header/footer behavior.
+   ============================================================ */
+
+body { font-size: 14.5px; }
+main.wrap { padding-top: 8px; }
+.view { padding: 32px 0 64px; }
+
+.offline { display: inline-flex; align-items: center; gap: 7px; font: 12px var(--font-mono); color: var(--muted); }
+.offline .dot { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-wash); }
+@media (max-width: 1000px) { .offline { display: none; } }
+
+/* legacy components, scaled up and calmed down */
+.section-title { font: 400 22px/1.2 var(--font-display); letter-spacing: .04em; text-transform: uppercase; color: var(--text); margin: 0 0 10px; }
+.section-title .ic { color: var(--red-2); }
+.section-sub { font-size: 15px; color: var(--text-2); max-width: 70ch; margin: 0 0 24px; line-height: 1.6; }
+.btn { height: 36px; padding: 0 14px; font-size: 13.5px; border-radius: var(--r-sm); }
+.btn.small { height: 30px; padding: 0 11px; font-size: 12.5px; }
+.input { font-size: 14px; padding: 9px 12px; border-color: var(--line-2); border-radius: var(--r-sm); }
+textarea.input { font-size: 13px; line-height: 1.6; }
+.card { border-radius: var(--r-lg); border-color: var(--line); background: var(--surface); }
+.card-pad { padding: 20px 22px; }
+.tab-row { margin-bottom: 20px; }
+.tab { font-size: 13.5px; padding: 7px 14px; }
+.chip { font-size: 12px; }
+.panel-title, .pb-title { font-size: 12px; letter-spacing: .1em; }
+.small { font-size: 13px; }
+.cf-header .btn, .cf-footer .btn { height: auto; }
+
+/* home */
+.home-hero { padding: 24px 0 32px; }
+.home-hero .eyebrow { margin-bottom: 14px; }
+.home-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .home-tools { grid-template-columns: 1fr; } }
+.home-tool { padding: 24px; display: flex; flex-direction: column; gap: 10px; color: var(--text); }
+.home-tool:hover { color: var(--text); }
+.ht-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.ht-icon { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: var(--red-wash); color: var(--red-2); }
+.ht-key { font-size: 11px; color: var(--faint); border: 1px solid var(--line-2); border-radius: 4px; padding: 2px 6px; }
+.home-tool h2 { font-size: 18px; }
+.home-tool p { margin: 0; }
+.home-tool ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13.5px; color: var(--text-2); }
+.home-tool li { padding-left: 16px; position: relative; }
+.home-tool li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 1.5px; background: var(--red); }
+.ht-go { margin-top: auto; padding-top: 12px; color: var(--red-2); font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; }
+.home-note { margin-top: 28px; text-align: center; }
+.home-note a { color: var(--text); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
+
+/* the legacy fade-in could freeze half-way and leave pages dimmed */
+.view, .view * { animation: none !important; }
+
+/* search box with icon (was unstyled in the original) */
+.search-wrap { position: relative; }
+.search-wrap .search-ic { position: absolute; left: 13px; top: 13px; color: var(--muted); pointer-events: none; }
+.search-wrap .input { padding-left: 40px; }

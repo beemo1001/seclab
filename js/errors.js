@@ -334,9 +334,9 @@ const SLErrors = (() => {
   function view() {
     const tabs = [['errors', 'Errors', 'alert'], ['errno', 'errno table', 'binary'], ['signals', 'Signals', 'activity'], ['exit', 'Exit codes', 'flag']];
     rootEl = h('div', { class: 'view' },
-      SL.sectionTitle('terminal', '🐧 Linux Error Reference'),
+      SL.sectionTitle('terminal', 'Linux error reference'),
       h('p', { class: 'section-sub' },
-        'Sixty of the errors every Linux user meets, each with the real meaning, the diagnosis commands and the actual fix. The point is not to copy-paste: every entry teaches you how to find the answer yourself next time. Plus the errno, signal and exit-code tables, and a decoder for those mysterious 137s.'),
+        'Paste an error message, an exit code like 137 or a whole block of terminal output. Each match explains what it means, how to diagnose it yourself and how to fix it.'),
       h('div', { class: 'tab-row' },
         tabs.map(([id, label, ic]) => h('button', {
           class: 'tab' + (state.tab === id ? ' active' : ''),

@@ -701,10 +701,13 @@ const SLAsm = (() => {
     };
 
     const loadExample = ex => { ta.value = ex.code; state.input = ex.code; run(); };
+    // never open on an empty page: show the first example until the user pastes their own
+    if (!state.input) setTimeout(() => loadExample(ASMDATA.EXAMPLES[0]), 0);
+    else setTimeout(() => { ta.value = state.input; run(); }, 0);
 
     return SL.h('div', { class: 'view' },
-      SL.sectionTitle('cpu', 'Assembly Annotator'),
-      SL.h('p', { class: 'section-sub' }, 'Paste assembly from a pwn challenge, a class exercise or objdump. Every line gets a plain-English explanation, and the engine flags what matters for exploitation: stack canaries, syscalls, unsafe library calls, ROP gadgets, PIE addressing and frame sizes. Nothing leaves your browser.'),
+      SL.sectionTitle('cpu', 'Assembly annotator'),
+      SL.h('p', { class: 'section-sub' }, 'Paste output from objdump, gdb or a pwn challenge. Every line gets a plain-English explanation, plus the things that matter for exploitation: canaries, syscalls, unsafe calls and ROP gadgets.'),
       SL.h('div', { class: 'workbench' },
         SL.h('div', { class: 'workbench-col' },
           SL.h('div', { class: 'card card-pad' },
