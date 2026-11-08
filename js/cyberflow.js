@@ -8,18 +8,22 @@ window.CF = (function () {
 
   // Public URLs of the three tools. Local dev servers map to ports 4101-4103.
   var SUITE = [
-    { id: 'bountyflow', name: 'BountyFlow', port: 4101, url: 'https://beemo1001.github.io/bountyflow/',
+    { id: 'bountyflow', name: 'BountyFlow', port: 4101, url: 'https://beemo1001.github.io/bountyflow/', whop: 'https://whop.com/cyberflow/exp_SUX6Kgq38007TT/app/',
       desc: 'Every bug bounty program, analyzed. New programs daily.',
       icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>' },
-    { id: 'seclab', name: 'SecLab', port: 4102, url: 'https://beemo1001.github.io/seclab/',
+    { id: 'seclab', name: 'SecLab', port: 4102, url: 'https://beemo1001.github.io/seclab/', whop: 'https://whop.com/cyberflow/exp_FgWUetE9YI1jm3/app/',
       desc: 'Decoders, assembly annotator and Linux error reference.',
       icon: '<path d="M10 2v7.31L4.2 19.1A2 2 0 0 0 5.9 22h12.2a2 2 0 0 0 1.7-2.9L14 9.31V2"/><path d="M8.5 2h7M7 16h10"/>' },
-    { id: 'hackgrid', name: 'HackGrid', port: 4103, url: 'https://beemo1001.github.io/hackrange/',
+    { id: 'hackgrid', name: 'HackGrid', port: 4103, url: 'https://beemo1001.github.io/hackrange/', whop: 'https://whop.com/cyberflow/exp_HBRu9Am7Bos9Zg/app/',
       desc: 'Hands-on hacking labs that run in your browser.',
       icon: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/>' }
   ];
   var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  function hrefFor(s) { return local ? 'http://' + location.hostname + ':' + s.port + '/' : s.url; }
+  // Inside the Whop community the tools run in an iframe: link to the Whop pages (opened in the
+  // top window) so members stay in Whop. Standalone, link to the public sites.
+  var embedded = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+  function hrefFor(s) { return local ? 'http://' + location.hostname + ':' + s.port + '/' : (embedded ? s.whop : s.url); }
+  var linkTarget = embedded && !local ? ' target="_top"' : '';
 
   // The CyberFlow "D": five nested crimson stripes, as in the logo.
   function markSVG(cls) {
@@ -43,7 +47,7 @@ window.CF = (function () {
     if (host) {
       host.className = 'cf-suite';
       var items = SUITE.map(function (s) {
-        return '<a href="' + hrefFor(s) + '"' + (s.id === current ? ' class="current"' : '') + '>' + svgIcon(s.icon, 18) +
+        return '<a href="' + hrefFor(s) + '"' + linkTarget + (s.id === current ? ' class="current"' : '') + '>' + svgIcon(s.icon, 18) +
           '<div><b>' + s.name + '</b><span>' + s.desc + '</span></div></a>';
       }).join('');
       host.innerHTML =
@@ -61,7 +65,7 @@ window.CF = (function () {
     }
 
     var foot = document.getElementById('cfFooterLinks');
-    if (foot) foot.innerHTML = SUITE.map(function (s) { return '<a href="' + hrefFor(s) + '">' + s.name + '</a>'; }).join('');
+    if (foot) foot.innerHTML = SUITE.map(function (s) { return '<a href="' + hrefFor(s) + '"' + linkTarget + '>' + s.name + '</a>'; }).join('');
 
     // Close any open .pop when clicking outside it or pressing Escape.
     document.addEventListener('click', function (e) {
@@ -113,5 +117,5 @@ window.CF = (function () {
     };
   }
 
-  return { SUITE: SUITE, markSVG: markSVG, initChrome: initChrome, toast: toast, copy: copy, boot: boot, hrefFor: hrefFor };
+  return { SUITE: SUITE, embedded: embedded, markSVG: markSVG, initChrome: initChrome, toast: toast, copy: copy, boot: boot, hrefFor: hrefFor };
 })();
