@@ -38,7 +38,7 @@ const SLApp = (() => {
           h('p', { class: 'dim' }, t.line),
           h('ul', {}, t.points.map(p => h('li', {}, p))),
           h('span', { class: 'ht-go' }, 'Open ', icon('chevron-right', 14))))),
-      h('p', { class: 'muted small home-note' }, 'Practice what you learn here in ', h('a', { href: CF.hrefFor(CF.SUITE[2]) }, 'HackGrid'), ', then hunt real programs with ', h('a', { href: CF.hrefFor(CF.SUITE[0]) }, 'BountyFlow'), '.'));
+      h('p', { class: 'muted small home-note' }, 'Practice what you learn here in ', h('a', { href: CF.hrefFor(CF.SUITE[2]), target: CF.embedded ? '_top' : null }, 'HackGrid'), ', then hunt real programs with ', h('a', { href: CF.hrefFor(CF.SUITE[0]), target: CF.embedded ? '_top' : null }, 'BountyFlow'), '.'));
   }
 
   function route() {
